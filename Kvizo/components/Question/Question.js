@@ -28,9 +28,8 @@ export default class Question extends React.Component {
 
       quesObj.incorrect_answers.forEach((incorrect_answer, index) => {
         //to change the key in incorrect answers
-        let key = `${quesObj.id}-${index}`;
-        console.log(key)
-        console.log(incorrect_answer)
+        let key = `${quesObj.id}`-`${index}`;
+       
         //to change the key in correct answer
         result.push(
           <RadioButton value={incorrect_answer} key={key}>
@@ -66,7 +65,7 @@ export default class Question extends React.Component {
           selectedIndex={null} >
           {this.renderSelection(quesObj)}
         </RadioGroup>
-        <TouchableOpacity style={styles.button} onPress={() => { this.props.onSelect(this.state.answer); }}>
+        <TouchableOpacity style={styles.button} onPress={() => { this.props.onSelection(this.state.answer); }}>
           <Text style={styles.buttonText}>Submit Answer </Text>
         </TouchableOpacity>
       </View>

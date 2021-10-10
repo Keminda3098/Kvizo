@@ -15,8 +15,6 @@ export default class Options extends React.Component {
 
     render() {
 
-        const extraData = props.route.params.extraData;
-
         const { navigate } = this.props.navigation;
 
         const register = () => {
@@ -28,55 +26,31 @@ export default class Options extends React.Component {
             navigate('KvizoHome', { user: "Sneaker" })
         }
 
-        const clickLogin = () => {
-
-            const email = this.state.email;
-            const password = this.state.password;
-
-            firebase.auth().signInWithEmailAndPassword(email, password)
-                .then((response) => {
-                    const userCollection = firebase.firestore().collection('users')
-                    userCollection.doc(response.user.uid).get().then(collectionDoc => {
-                        if (!collectionDoc.exists) {
-                            alert("This user is not available")
-                            return;
-                        }
-                        const user = collectionDoc.data()
-                        navigate('KvizoHome', { user: user })
-                    })
-                        .catch(error => {
-                            alert(error)
-                        });
-                })
-                .catch(error => {
-                    alert(error)
-                })
-        }
 
         return (
             <View style={styles.container}>
-                 <Text style={styles.category}>Select Category</Text>
-            
+                <Text style={styles.category}>Select Category</Text>
+
                 <View style={{ flex: 1, width: '100%' }}>
-                    <TouchableOpacity style={styles.button}  onPress={ this.props.navigation.navigate('Questions',  {  extraData: extraData })}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Questions', { category: 9 })}>
                         <Text style={styles.buttonTitle}>General Knowledge</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={ this.props.navigation.navigate('Questions',  { extraData: extraData})}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Questions', { category: 11 })}>
                         <Text style={styles.buttonTitle} >Films</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={sneak}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Questions', { category: 14 })}>
                         <Text style={styles.buttonTitle} >Television</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={sneak}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Questions', { category: 15 })}>
                         <Text style={styles.buttonTitle} >Video games</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={sneak}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Questions', { category: 12 })}>
                         <Text style={styles.buttonTitle} >Music</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={sneak}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Questions', { category: 10 })}>
                         <Text style={styles.buttonTitle} >Books</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={sneak}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Questions', { category: 23 })}>
                         <Text style={styles.buttonTitle} >History</Text>
                     </TouchableOpacity>
                 </View>

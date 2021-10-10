@@ -3,16 +3,19 @@ import { View, Text, ActivityIndicator, StyleSheet, Image, Pressable } from "rea
 import { firebase } from '../../firebase/config';
 import Question from "../Question/Question";
 import styles from "../Questions/QuestionsStyle";
+import { QuizApi } from "../../api/QuizApi";
 
 export default class Questions extends React.Component {
   constructor(props) {
     super(props);
 
-    const userData = this.props.extraData
+    const userData = this.props.extraData;
+    var category = this.props.route.params.category || 9;
 
     this.state = {
       loading: false,
       userData: userData,
+      category: category,
       questions: [],
       current: 0,
       correctScore: 5,
@@ -25,47 +28,12 @@ export default class Questions extends React.Component {
   }
 
   getQuizQuestions = async (category) => {
+
     await this.setState({ loading: true });
-    if (category == "General Knowledge") {
-      const resp = await fetch('https://opentdb.com/api.php?amount=5&category=9&difficulty=medium');
-    }
-
-    else if (category == "Films") {
-      const resp = await fetch('https://opentdb.com/api.php?amount=5&category=11&difficulty=medium');
-    }
-
-
-    else if (category == "Television") {
-      const resp = await fetch('https://opentdb.com/api.php?amount=5&category=14&difficulty=medium');
-    }
-
-
-    else if (category == "Video games") {
-      const resp = await fetch('https://opentdb.com/api.php?amount=5&category=15&difficulty=medium');
-    }
-
-
-    else if (category == "Music") {
-      const resp = await fetch('https://opentdb.com/api.php?amount=5&category=12&difficulty=medium');
-    }
-
-
-    else if (category == "Books") {
-      const resp = await fetch('https://opentdb.com/api.php?amount=5&category=12&difficulty=easy&type=multiple');
-    }
-
-
-    else if (category == "History") {
-      const resp = await fetch('https://opentdb.com/api.php?amount=5&category=12&difficulty=easy&type=multiple');
-    }
-    else {
-      const resp = await fetch('https://opentdb.com/api.php?amount=5&category=12&difficulty=easy&type=multiple');
-    }
-
+    const resp = await QuizApi.getQuizByCategory(category)
     const quiz = await resp.json();
     const { results } = quiz;
     results.forEach(item => { item.id = Math.floor(Math.random() * 10000); });
-    //console.log(results)
     await this.setState({ questions: results, loading: false });
   };
 
@@ -81,7 +49,7 @@ export default class Questions extends React.Component {
       completed: false
     },
       () => {
-        this.getQuizQuestions(); //get quiz questions call after reset
+        this.getQuizQuestions(this.state.category); //get quiz questions call after reset
       }
     );
   };
@@ -89,6 +57,7 @@ export default class Questions extends React.Component {
   submitAnswer = (indx, answer) => {
     const question = this.state.questions[indx];
     const isCorrect = question.correct_answer === answer;
+    console.log("index" + indx + " | " + "answer" + answer );
     const output = { ...this.state.output };
 
     output.score = isCorrect ? output.score + 5 : output.score;
@@ -104,7 +73,7 @@ export default class Questions extends React.Component {
   };
 
   componentDidMount() {
-    this.getQuizQuestions();
+    this.getQuizQuestions(this.state.category);
   }
 
   render() {
@@ -143,7 +112,7 @@ export default class Questions extends React.Component {
         ) : (<></>)}
 
         {questionLength > 0 && completeState === false ? (
-          <Question onSelect={answer => { this.submitAnswer(this.state.current, answer); }} question={this.state.questions[this.state.current]} correctPosition={Math.floor(Math.random() * 3)}
+          <Question onSelection={answer => { this.submitAnswer(this.state.current, answer); }} question={this.state.questions[this.state.current]} correctPosition={Math.floor(Math.random() * 3)}
             current={this.state.current}
           />
         ) : (<></>)}

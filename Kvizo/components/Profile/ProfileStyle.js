@@ -15,7 +15,7 @@ export default StyleSheet.create({
         fontWeight: "bold"
     },
     scrollView: {
-      marginHorizontal: 20,
+      marginHorizontal: 5,
     },
       welcome: {
         fontSize: 22,
@@ -74,6 +74,7 @@ export default StyleSheet.create({
         marginLeft: 30,
         marginRight: 30,
         marginTop: 20,
+        marginBottom : 10,
         height: 48,
         borderRadius: 25,
         alignItems: "center",

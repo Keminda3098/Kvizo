@@ -18,8 +18,8 @@ class KvizoHome extends React.Component {
     this.props.navigation.navigate('Profile',  { extraData: this.props.extraData })
   }
 
-  kvizoOptions = (extraData)=> {
-    this.props.navigation.navigate('Options',  { extraData: extraData })
+  kvizoOptions = ()=> {
+    this.props.navigation.navigate('Options')
   }
 
   render() {
@@ -32,7 +32,7 @@ class KvizoHome extends React.Component {
         <Text style={styles.instruction}>
           Kvizo will give you 5 Random Questions and based on your answers it will give you a Score.
         </Text>
-        <Pressable style={styles.button_kvizo} onPress={() => this.kvizoOptions(this.props.extraData)} >
+        <Pressable style={styles.button_kvizo} onPress={() => this.kvizoOptions()} >
           <Text style={styles.text}>Lets Kvizo!</Text>
         </Pressable>
         <Pressable  style={styles.button_kvizo} onPress={() => this.profile()}  >

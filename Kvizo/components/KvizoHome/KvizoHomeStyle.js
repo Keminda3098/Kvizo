@@ -11,19 +11,20 @@ export default StyleSheet.create({
   welcome: {
     fontSize: 22,
     fontWeight: "bold",
-    backgroundColor: "#117ded",
+    backgroundColor: "#da9c4f",
     color: "white",
     padding: 10
   },
 
   button_kvizo: {
-    backgroundColor: "#117ded",
+    backgroundColor: '#da9c4f',
     alignItems: 'center',
     minWidth : 300,
     justifyContent: 'center',
     paddingVertical: 17,
     paddingHorizontal: 32,
     borderRadius: 25,
+    fontWeight: "bold",
     marginTop : 10
   },
   button: {
@@ -33,6 +34,7 @@ export default StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 4,
+    fontWeight: "bold",
     elevation: 3,
     marginTop : 10
   },
@@ -48,7 +50,8 @@ export default StyleSheet.create({
   },
   instruction: {
     fontSize: 16,
-    color: "#ffc850",
+    color: "#ffffff",
+    fontWeight: "bold",
     textAlign: "center",
     padding: 10,
     marginTop: 15,

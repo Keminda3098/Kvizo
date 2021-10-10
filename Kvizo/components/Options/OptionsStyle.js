@@ -6,9 +6,6 @@ export default StyleSheet.create({
         alignItems: 'center',
         backgroundColor:'#45377e',
     },
-    title: {
-
-    },
     logo: {
         flex: 1,
         alignSelf: "center",
@@ -28,7 +25,7 @@ export default StyleSheet.create({
         paddingLeft: 16
     },
     button: {
-        backgroundColor: '#51408d',
+        backgroundColor: '#da9c4f',
         marginLeft: 10,
         marginRight: 30,
         marginTop: 20,
